@@ -1,0 +1,19 @@
+<div class="container" >
+  <h3>Musics</h3>
+
+  <div id="musics">
+    <% @musics.each do |music| %>
+      <div class="row py-3 border" id="<%= dom_id music %>">
+        <div class="col-6">
+          <%= link_to music.name, music_path(music), class: 'link-dark' %>
+        </div>
+        <div class="col-1">
+          <%= music.music_tag_articles_count %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="d-flex border" >
+    <%= paginate @musics %>
+  </div>
+</div>

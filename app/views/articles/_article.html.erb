@@ -1,0 +1,59 @@
+<div id="<%= dom_id article %>">
+  <div class="row m-2" >
+    <div class="col-1 fw-bold">タイトル</div>
+    <div class="col-10">
+      <%= link_to article.title, article.url, target: :_blank %>
+    </div>
+  </div>
+  <div class="row m-2" data-controller="copy">
+    <div class="col-1 fw-bold">感想</div>
+    <div class="col">
+      <%= button_tag :copy, data: { action: 'click->copy#copy' } %>
+    </div>
+    <div class="col-10" data-copy-target="content"><pre><%= article.note %></pre></div>
+  </div>
+  <div class="row m-2" data-controller="copy">
+    <div class="col-1 fw-bold">Twitter用</div>
+    <div class="col">
+      <%= button_tag :copy, data: { action: 'click->copy#copy' } %>
+    </div>
+    <div class="col-10 d-none" data-copy-target="content"><pre><%= article.for_twitter %></pre></div>
+  </div>
+  <div class="row m-2" data-controller="copy">
+    <div class="col-1 fw-bold">Note用</div>
+    <div class="col">
+      <%= button_tag :copy, data: { action: 'click->copy#copy' } %>
+    </div>
+    <div class="col-10 d-none" data-copy-target="content"><pre><%= article.for_note %></pre></div>
+  </div>
+  <div class="row m-2" >
+    <div class="col-1 fw-bold">タグ</div>
+    <div class="col-10">
+      <ul>
+        <% article.common_tags.each do |tag| %>
+          <li><%= tag.name %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="row m-2" >
+    <div class="col-1 fw-bold">アクター</div>
+    <div class="col-10">
+      <ul>
+        <% article.actor_tags.each do |actor_tag| %>
+          <li><%= link_to actor_tag.name, actor_path(id: actor_tag.id) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="row m-2" >
+    <div class="col-1 fw-bold">音楽</div>
+    <div class="col-10">
+      <ul>
+        <% article.music_tags.each do |music_tag| %>
+          <li><%= link_to music_tag.name, music_path(id: music_tag.id) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
