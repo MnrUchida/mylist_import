@@ -1,0 +1,25 @@
+<div class="container" >
+  <h3>Musics</h3>
+
+  <div id="musics">
+    <% @musics.each do |music| %>
+      <div class="row py-3 border" id="<%= dom_id music %>">
+        <div class="col-6">
+          <%= link_to music.name, music_tag_path(music), class: 'link-dark' %>
+        </div>
+        <div class="col-1">
+          <%= music.music_tag_articles_count %>
+        </div>
+        <div class="col-1">
+          <%= link_to "新規音源", new_music_path(title: music.name, tag_ids: music.id), target: :_blank %>
+        </div>
+        <div class="col-1">
+          <%= link_to "先頭", music.articles.first.url, target: :_blank %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="d-flex border" >
+    <%= paginate @musics %>
+  </div>
+</div>

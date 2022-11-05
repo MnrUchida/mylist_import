@@ -1,14 +1,12 @@
 <div class="container" >
   <h3>Musics</h3>
 
+  <%= link_to '新規', new_music_path %>
   <div id="musics">
     <% @musics.each do |music| %>
       <div class="row py-3 border" id="<%= dom_id music %>">
         <div class="col-6">
-          <%= link_to music.name, music_path(music), class: 'link-dark' %>
-        </div>
-        <div class="col-1">
-          <%= music.music_tag_articles_count %>
+          <%= link_to music.title, music, class: 'link-dark' %>
         </div>
       </div>
     <% end %>

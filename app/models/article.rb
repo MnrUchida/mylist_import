@@ -19,6 +19,8 @@ require 'uri'
 #  index_articles_on_url   (url) UNIQUE
 #
 class Article < ApplicationRecord
+  include UrlConcern
+
   has_many :actor_tag_articles, dependent: :destroy
   has_many :actor_tags, through: :actor_tag_articles
   has_many :music_tag_articles, dependent: :destroy
@@ -26,9 +28,6 @@ class Article < ApplicationRecord
   has_many :common_tag_articles, dependent: :destroy
   has_many :common_tags, through: :common_tag_articles
 
-  validates :code, uniqueness: true
-
-  before_validation :set_code
   after_save :update_count
 
   def common_tag_list
@@ -125,21 +124,6 @@ class Article < ApplicationRecord
     article.html_data = body
     article.parse_html
     article.save!
-  end
-
-  def self.code_from_url(url)
-    URI.parse(url).path.split('/').last
-  end
-
-  class << self
-    private
-      def find_by_url(url)
-        find_or_initialize_by(code: code_from_url(url))
-      end
-  end
-
-  private def set_code
-    self.code = self.class.code_from_url(self.url)
   end
 
   private def update_count

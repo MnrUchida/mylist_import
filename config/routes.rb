@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   root "articles#index"
 
   resources :articles
-  resources :musics, only: %i[index show update]
+  resources :music_tags, only: %i[index show]
+  resources :musics, only: %i[index show new create edit update]
   resources :actors, only: %i[index show update]
 
   namespace :api do

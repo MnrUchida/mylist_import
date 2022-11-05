@@ -13,6 +13,7 @@ class MusicTag < ApplicationRecord
 
   has_many :music_tag_articles, dependent: :restrict_with_exception, counter_cache: true
   has_many :articles, through: :music_tag_articles
+  has_many :music_tag_musics, dependent: :restrict_with_exception
 
   def self.update_count
     all.each do |tag|

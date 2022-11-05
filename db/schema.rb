@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_17_083938) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_03_024112) do
   create_table "actor_tag_articles", force: :cascade do |t|
     t.integer "actor_tag_id"
     t.integer "article_id"
@@ -64,11 +64,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_17_083938) do
     t.index ["music_tag_id"], name: "index_music_tag_articles_on_music_tag_id"
   end
 
+  create_table "music_tag_musics", force: :cascade do |t|
+    t.integer "music_tag_id"
+    t.integer "music_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["music_id"], name: "index_music_tag_musics_on_music_id"
+    t.index ["music_tag_id"], name: "index_music_tag_musics_on_music_tag_id"
+  end
+
   create_table "music_tags", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "music_tag_articles_count"
+  end
+
+  create_table "musics", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "url"
+    t.string "code"
+    t.text "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "taggings", force: :cascade do |t|
