@@ -2,7 +2,9 @@ class MusicsController < ApplicationController
   before_action :set_music, only: %i[show edit update destroy]
 
   def index
-    @musics = Music.all.page(params[:page])
+    @musics = Music.all
+    @musics = @musics.where("title LIKE :title", title: "%#{search_params[:title]}%")
+    @musics = @musics.page(params[:page])
   end
 
   def new
@@ -45,5 +47,9 @@ class MusicsController < ApplicationController
 
     def music_params
       params.require(:music).permit(:note, :title, :url, :tag_ids)
+    end
+
+    def search_params
+      params.fetch(:search, {}).permit(:title)
     end
 end

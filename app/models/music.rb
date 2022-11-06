@@ -13,9 +13,12 @@
 class Music < ApplicationRecord
   include UrlConcern
 
+  has_many :articles
   has_many :music_tag_musics, dependent: :restrict_with_exception
 
   def tag_ids=(value)
+    return if value.blank?
+
     value.split(',').each do |tag_id|
       self.music_tag_musics.build(music_tag_id: tag_id) if self.music_tag_musics.where(music_tag_id: tag_id).blank?
     end

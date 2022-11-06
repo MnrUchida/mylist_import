@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_03_024112) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_06_135210) do
   create_table "actor_tag_articles", force: :cascade do |t|
     t.integer "actor_tag_id"
     t.integer "article_id"
@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_03_024112) do
     t.datetime "updated_at", null: false
     t.string "code"
     t.text "html_data"
+    t.bigint "music_id"
     t.index ["code"], name: "index_articles_on_code", unique: true
     t.index ["url"], name: "index_articles_on_url", unique: true
   end

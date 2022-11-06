@@ -12,6 +12,7 @@ require 'uri'
 #  url        :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  music_id   :bigint
 #
 # Indexes
 #
@@ -21,6 +22,7 @@ require 'uri'
 class Article < ApplicationRecord
   include UrlConcern
 
+  belongs_to :music
   has_many :actor_tag_articles, dependent: :destroy
   has_many :actor_tags, through: :actor_tag_articles
   has_many :music_tag_articles, dependent: :destroy
@@ -129,5 +131,11 @@ class Article < ApplicationRecord
   private def update_count
     actor_tags.update_count
     music_tags.update_count
+  end
+
+  def self.set_music_ids
+    self.where(music_id: nil).each do |article|
+      article.update(music_id: article.music_tags.flat_map(&:musics).first.id)
+    end
   end
 end

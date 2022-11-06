@@ -50,9 +50,7 @@
     <div class="col-1 fw-bold">音楽</div>
     <div class="col-10">
       <ul>
-        <% article.music_tags.each do |music_tag| %>
-          <li><%= link_to music_tag.name, music_path(id: music_tag.id) %></li>
-        <% end %>
+        <li><%= link_to article.music_title, music_path(id: article.music_id) %></li>
       </ul>
     </div>
   </div>

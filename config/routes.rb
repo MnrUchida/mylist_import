@@ -12,4 +12,8 @@ Rails.application.routes.draw do
   namespace :api do
     resources :articles, only: :create
   end
+
+  namespace :shared do
+    resources :musics, only: %i[index show new create]
+  end
 end

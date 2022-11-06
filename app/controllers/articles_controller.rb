@@ -52,6 +52,6 @@ class ArticlesController < ApplicationController
     end
 
     def article_params
-      params.require(:article).permit(:note, :title, :url, :common_tag_list, :actor_list, :music_list)
+      params.require(:article).permit(:note, :title, :url, :common_tag_list, :actor_list, :music_id)
     end
 end

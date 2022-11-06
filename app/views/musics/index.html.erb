@@ -1,17 +1,40 @@
 <div class="container" >
   <h3>Musics</h3>
 
-  <%= link_to '新規', new_music_path %>
-  <div id="musics">
-    <% @musics.each do |music| %>
-      <div class="row py-3 border" id="<%= dom_id music %>">
-        <div class="col-6">
-          <%= link_to music.title, music, class: 'link-dark' %>
+  <div class='mb-3'>
+    <%= form_with(url: musics_path, scope: :search, method: :get, html: {
+      data: {
+        turbo_frame: "music-list",
+        controller: "form",
+        action: "input->form#submit"
+      }
+    }) do |form| %>
+      <div class="row m-2">
+        <div class="col-4">
+          <%= form.text_field :title, class: 'form-control' %>
         </div>
       </div>
-    <% end %>
+  <% end %>
   </div>
-  <div class="d-flex border" >
-    <%= paginate @musics %>
-  </div>
+
+  <%= turbo_frame_tag "music-list" do %>
+    <div id="musics">
+      <div class="row py-3 border">
+        <div class="col-11">タイトル</div>
+        <div class="col-1">
+          <%= link_to '新規', new_music_path %>
+        </div>
+      </div>
+      <% @musics.each do |music| %>
+        <div class="row py-3 border" id="<%= dom_id music %>">
+          <div class="col-12">
+            <%= link_to music.title, music, class: 'link-dark', data: { turbo_frame: "_top" } %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="d-flex border" >
+      <%= paginate @musics %>
+    </div>
+  <% end %>
 </div>

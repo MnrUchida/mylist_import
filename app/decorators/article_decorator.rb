@@ -1,4 +1,6 @@
 class ArticleDecorator < ApplicationDecorator
+  delegate :title, to: :music, prefix: :music
+
   def self.collection_decorator_class
     ArticlesDecorator
   end

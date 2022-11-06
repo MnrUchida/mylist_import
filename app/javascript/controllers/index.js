@@ -4,5 +4,11 @@
 
 import { application } from "./application"
 
-import CopyController from "./copy_controller"
+import CopyController from "./copy_controller.js"
 application.register("copy", CopyController)
+
+import FormController from "./form_controller.js"
+application.register("form", FormController)
+
+import ModalController from "./modal_controller.js"
+application.register("modal", ModalController)
