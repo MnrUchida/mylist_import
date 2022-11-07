@@ -2,16 +2,20 @@ class MusicsController < ApplicationController
   before_action :set_music, only: %i[show edit update destroy]
 
   def index
-    @musics = Music.all
-    @musics = @musics.where("title LIKE :title", title: "%#{search_params[:title]}%")
+    @musics = Music.preload(:articles)
+    @musics = @musics.where("articles.title LIKE :title", title: "%#{search_params[:title]}%")
+    @musics = @musics.order_by_article_count
     @musics = @musics.page(params[:page])
+    @musics = MusicDecorator.decorate_collection(@musics)
   end
 
   def new
     @music = Music.new(title: params[:title], tag_ids: params[:tag_ids])
   end
 
-  def show; end
+  def show
+    @music = MusicDecorator.decorate(@music, context: { page: params[:page] })
+  end
 
   def edit; end
 

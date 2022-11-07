@@ -27,8 +27,11 @@
       </div>
       <% @musics.each do |music| %>
         <div class="row py-3 border" id="<%= dom_id music %>">
-          <div class="col-12">
+          <div class="col-11">
             <%= link_to music.title, music, class: 'link-dark', data: { turbo_frame: "_top" } %>
+          </div>
+          <div class="col-1">
+            <%= music.articles_count %>
           </div>
         </div>
       <% end %>
