@@ -22,7 +22,7 @@ require 'uri'
 class Article < ApplicationRecord
   include UrlConcern
 
-  belongs_to :music
+  belongs_to :music, optional: true
   has_many :actor_tag_articles, dependent: :destroy
   has_many :actor_tags, through: :actor_tag_articles
   has_many :music_tag_articles, dependent: :destroy

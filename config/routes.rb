@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :articles
   resources :music_tags, only: %i[index show]
   resources :musics, only: %i[index show new create edit update]
-  resources :actors, only: %i[index show update]
+  resources :actor_tags, only: %i[index show update]
+  resources :actors, only: %i[index show new create edit update]
 
   namespace :api do
     resources :articles, only: :create

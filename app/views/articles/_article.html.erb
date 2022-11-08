@@ -50,7 +50,9 @@
     <div class="col-1 fw-bold">音楽</div>
     <div class="col-10">
       <ul>
-        <li><%= link_to article.music_title, music_path(id: article.music_id) %></li>
+        <% if article.music.present? %>
+          <li><%= link_to article.music_title, music_path(id: article.music_id) %></li>
+        <% end %>
       </ul>
     </div>
   </div>

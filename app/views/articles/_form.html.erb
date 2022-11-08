@@ -34,7 +34,9 @@
   <div>
     <%= form.label :music_list, '音楽', class: 'form-label' %>
     <%= link_to "一覧", shared_musics_path, class: "btn btn-sm btn-outline-primary me-2", data: { turbo_frame: "modal" } %>
-    <%= turbo_frame_tag "music-id-field" %>
+    <%= turbo_frame_tag "music-id-field" do %>
+      <%= render(partial: 'shared/musics/music', locals: { music: article.music }) %>
+    <% end %>
   </div>
 
   <div>

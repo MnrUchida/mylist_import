@@ -3,14 +3,14 @@ class MusicsController < ApplicationController
 
   def index
     @musics = Music.preload(:articles)
-    @musics = @musics.where("articles.title LIKE :title", title: "%#{search_params[:title]}%")
+    @musics = @musics.where("musics.title LIKE :title", title: "%#{search_params[:title]}%")
     @musics = @musics.order_by_article_count
     @musics = @musics.page(params[:page])
     @musics = MusicDecorator.decorate_collection(@musics)
   end
 
   def new
-    @music = Music.new(title: params[:title], tag_ids: params[:tag_ids])
+    @music = Music.new
   end
 
   def show

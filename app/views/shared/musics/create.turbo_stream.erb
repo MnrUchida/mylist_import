@@ -1,1 +1,1 @@
-<%= turbo_stream.update 'music-id-field', partial: 'music' %>
+<%= turbo_stream.update 'music-id-field', partial: 'music', locals: { music: @music } %>

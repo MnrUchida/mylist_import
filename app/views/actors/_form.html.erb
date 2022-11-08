@@ -1,0 +1,37 @@
+<%= form_with(model: actor) do |form| %>
+  <% if actor.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(actor.errors.count, "error") %> prohibited this actor from being saved:</h2>
+
+      <ul>
+        <% actor.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, '名前', class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= form.label :url, 'URL', class: 'form-label' %>
+    <%= form.text_field :url, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= form.label :tag_ids, 'TagId', class: 'form-label' %>
+    <%= form.text_field :tag_ids, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= form.label :note, '感想', class: 'form-label' %>
+    <%= form.text_area :note, class: 'form-control', rows: 5 %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
