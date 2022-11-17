@@ -21,8 +21,9 @@ class ArticlesController < ApplicationController
 
   # PATCH/PUT /articles/1 or /articles/1.json
   def update
+    @article.attributes = article_params
     respond_to do |format|
-      if @article.update(article_params)
+      if @article.save_with_actors!(article_params[:actor_ids])
         format.html { redirect_to article_url(@article), notice: "Article was successfully updated." }
         format.json { render :show, status: :ok, location: @article }
       else
@@ -35,7 +36,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     respond_to do |format|
-      if @article.save
+      if @article.save_with_actors!(article_params[:actor_ids])
         format.html { redirect_to article_url(@article), notice: "Article was successfully updated." }
         format.json { render :show, status: :ok, location: @article }
       else
@@ -52,6 +53,6 @@ class ArticlesController < ApplicationController
     end
 
     def article_params
-      params.require(:article).permit(:note, :title, :url, :common_tag_list, :actor_list, :music_id)
+      params.require(:article).permit(:note, :title, :url, :common_tag_list, :actor_list, :music_id, actor_ids: [])
     end
 end

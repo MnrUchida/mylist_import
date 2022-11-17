@@ -12,3 +12,6 @@ application.register("form", FormController)
 
 import ModalController from "./modal_controller.js"
 application.register("modal", ModalController)
+
+import MultipleSelectModalController from "./multiple_select_modal_controller.js"
+application.register("multiple-select-modal", MultipleSelectModalController)

@@ -2,8 +2,6 @@ module UrlConcern
   extend ActiveSupport::Concern
 
   included do
-    validates :url, uniqueness: true, if: -> { url.present? }
-
     before_validation :set_code
   end
 

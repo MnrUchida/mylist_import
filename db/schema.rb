@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_07_050959) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_13_043645) do
+  create_table "actor_articles", force: :cascade do |t|
+    t.integer "actor_id"
+    t.integer "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_id"], name: "index_actor_articles_on_actor_id"
+    t.index ["article_id"], name: "index_actor_articles_on_article_id"
+  end
+
   create_table "actor_tag_actors", force: :cascade do |t|
     t.integer "actor_tag_id"
     t.integer "actor_id"
@@ -38,8 +47,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_07_050959) do
 
   create_table "actors", force: :cascade do |t|
     t.string "name", null: false
-    t.string "url", null: false
-    t.string "code", null: false
+    t.string "url"
+    t.string "code"
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

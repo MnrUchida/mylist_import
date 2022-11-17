@@ -40,8 +40,8 @@
     <div class="col-1 fw-bold">アクター</div>
     <div class="col-10">
       <ul>
-        <% article.actor_tags.each do |actor_tag| %>
-          <li><%= link_to actor_tag.name, actor_path(id: actor_tag.id) %></li>
+        <% article.actors.each do |actor| %>
+          <li><%= link_to actor.name, actor_path(id: actor.id) %></li>
         <% end %>
       </ul>
     </div>

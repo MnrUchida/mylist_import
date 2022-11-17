@@ -3,10 +3,10 @@
 # Table name: actors
 #
 #  id         :integer          not null, primary key
-#  code       :string           not null
+#  code       :string
 #  name       :string           not null
 #  note       :text
-#  url        :string           not null
+#  url        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -16,6 +16,8 @@ class Actor < ApplicationRecord
   # has_many :articles
   has_many :actor_tag_actors, dependent: :restrict_with_exception
   has_many :actor_tags, through: :actor_tag_actors
+  has_many :actor_articles, dependent: :destroy
+  has_many :articles, through: :actor_articles
 
   # scope :order_by_article_count, -> { joins(:articles).group(Music.column_names).order(Arel.sql("COUNT(articles.id) DESC")) }
 

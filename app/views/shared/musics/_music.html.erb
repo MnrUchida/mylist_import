@@ -1,4 +1,6 @@
 <%= turbo_frame_tag "music-id-field" do %>
-  <%= music.title %>
-  <%= hidden_field(:article, :music_id, value: music.id) %>
+  <% if music.present? %>
+    <%= music.title %>
+    <%= hidden_field(:article, :music_id, value: music.id) %>
+  <% end %>
 <% end %>

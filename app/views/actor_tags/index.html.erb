@@ -5,10 +5,16 @@
     <% @actors.each do |actor| %>
       <div class="row py-3 border" id="<%= dom_id actor %>">
         <div class="col-6">
-          <%= link_to actor.name, actor_path(actor), class: 'link-dark' %>
+          <%= link_to actor.name, actor_tag_path(actor), class: 'link-dark' %>
         </div>
         <div class="col-1">
           <%= actor.actor_tag_articles_count %>
+        </div>
+        <div class="col-1">
+          <%= link_to "新規アクター", new_actor_path(name: actor.name, tag_ids: actor.id), target: :_blank %>
+        </div>
+        <div class="col-1">
+          <%= link_to "先頭", actor.articles.first&.url, target: :_blank %>
         </div>
       </div>
     <% end %>

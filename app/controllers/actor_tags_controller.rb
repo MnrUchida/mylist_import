@@ -1,6 +1,10 @@
 class ActorTagsController < ApplicationController
   def index
-    @actors = ActorTag.order(actor_tag_articles_count: :desc).page(params[:page])
+    @actors = if params[:only]
+                ActorTag.only_not_used.order(actor_tag_articles_count: :desc).page(params[:page]).per(200)
+              else
+                ActorTag.order(actor_tag_articles_count: :desc).page(params[:page])
+              end
   end
 
   def show

@@ -17,6 +17,8 @@ class Music < ApplicationRecord
   has_many :music_tag_musics, dependent: :restrict_with_exception
   has_many :music_tags, through: :music_tag_musics
 
+  validates :url, uniqueness: true, if: -> { url.present? }
+
   scope :order_by_article_count, -> { joins(:articles).group(Music.column_names).order(Arel.sql("COUNT(articles.id) DESC")) }
 
   def tag_ids=(value)

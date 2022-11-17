@@ -16,5 +16,6 @@ Rails.application.routes.draw do
 
   namespace :shared do
     resources :musics, only: %i[index show new create]
+    resources :actors, only: %i[index update new create destroy]
   end
 end

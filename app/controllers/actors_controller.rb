@@ -18,29 +18,25 @@ class ActorsController < ApplicationController
   end
 
   def show
-    # @actor = ActorDecorator.decorate(@actor, context: { page: params[:page] })
+    @actor = ActorDecorator.decorate(@actor, context: { page: params[:page] })
   end
 
   def edit; end
 
   def update
-    respond_to do |format|
-      if @actor.update(actor_params)
-        redirect_to actor_url(@actor), notice: "Actor was successfully updated."
-      else
-        render :edit, status: :unprocessable_entity
-      end
+    if @actor.update(actor_params)
+      redirect_to actor_url(@actor), notice: "Actor was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def create
     @actor = Actor.new(actor_params)
-    respond_to do |format|
-      if @actor.save
-        redirect_to actor_url(@actor), notice: "Actor was successfully updated."
-      else
-        render :new, status: :unprocessable_entity
-      end
+    if @actor.save
+      redirect_to actor_url(@actor), notice: "Actor was successfully updated."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 

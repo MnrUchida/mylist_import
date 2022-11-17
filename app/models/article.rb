@@ -23,6 +23,8 @@ class Article < ApplicationRecord
   include UrlConcern
 
   belongs_to :music, optional: true
+  has_many :actor_articles, dependent: :destroy
+  has_many :actors, through: :actor_articles
   has_many :actor_tag_articles, dependent: :destroy
   has_many :actor_tags, through: :actor_tag_articles
   has_many :music_tag_articles, dependent: :destroy
@@ -31,6 +33,8 @@ class Article < ApplicationRecord
   has_many :common_tags, through: :common_tag_articles
 
   after_save :update_count
+
+  validates :url, uniqueness: true, if: -> { url.present? }
 
   def common_tag_list
     @common_tag_list ||= common_tags.pluck(:name).join(', ')
@@ -113,6 +117,16 @@ class Article < ApplicationRecord
     description = parsed.css('.VideoDescription-html')[0].inner_text
     CommonTag.included_tags(text: description).each do |tag|
       self.add_common_tag tag
+    end
+  end
+
+  def save_with_actors!(actor_ids)
+    actor_ids ||= []
+    transaction do
+      exist_ids = actor_articles.ids
+      actor_articles.reject { |actor_article| actor_ids.include? actor_article.actor_id }.each(&:destroy!)
+      actor_ids.reject { |actor_id| exist_ids.include? actor_id }.each { |actor_id| actor_articles.build(actor_id: actor_id) }
+      save!
     end
   end
 

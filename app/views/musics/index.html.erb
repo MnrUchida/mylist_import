@@ -22,7 +22,7 @@
       <div class="row py-3 border">
         <div class="col-11">タイトル</div>
         <div class="col-1">
-          <%= link_to '新規', new_music_path %>
+          <%= link_to '新規', new_music_path, data: { turbo_frame: "_top" } %>
         </div>
       </div>
       <% @musics.each do |music| %>

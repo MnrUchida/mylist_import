@@ -1,5 +1,4 @@
 import { Controller } from "@hotwired/stimulus"
-// BootstrapのModalをimport
 import { Modal } from "bootstrap"
 
 export default class extends Controller {
@@ -11,11 +10,6 @@ export default class extends Controller {
 
     // モーダルを表示する
     this.modal.show()
-
-    let element = document.getElementById('music-id-field');
-    element.addEventListener('turbo:frame-render', (event) => {
-      this.modal.hide();
-    });
   }
 
   disconnect() {

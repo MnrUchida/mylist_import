@@ -1,0 +1,11 @@
+<%= render "modal", title: "Musics" do %>
+  <h1>New actor</h1>
+
+  <%= render partial: 'form', locals: { actor: @actor } %>
+
+  <br>
+
+  <div>
+    <%= link_to "Back to actors", shared_actors_path %>
+  </div>
+<% end %>

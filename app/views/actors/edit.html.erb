@@ -1,12 +1,12 @@
-<h1>Editing music</h1>
+<h1>Editing actor</h1>
 
-<%= link_to @music.title, @music.url, target: :_blank %>
+<%= link_to @actor.name, @actor.url, target: :_blank %>
 
-<%= render partial: 'form', locals: { music: @music } %>
+<%= render partial: 'form', locals: { actor: @actor } %>
 
 <br>
 
 <div>
-  <%= link_to "Show this music", @music %> |
-  <%= link_to "Back to musics", musics_path %>
+  <%= link_to "Show this actor", @actor %> |
+  <%= link_to "Back to actors", actors_path %>
 </div>

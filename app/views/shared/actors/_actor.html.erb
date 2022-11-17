@@ -1,0 +1,7 @@
+<li id="<%= dom_id actor %>">
+  <% if actor.present? %>
+    <%= actor.name %>
+    <%= hidden_field(:article, :actor_ids, value: actor.id, multiple: true) %>
+    <%= link_to '削除', shared_actor_path(actor), data: { turbo_method: :delete } %>
+  <% end %>
+</li>

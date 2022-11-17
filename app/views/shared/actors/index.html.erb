@@ -1,0 +1,42 @@
+<%= render "multiple_select_modal", title: "Musics" do %>
+  <div class="container" >
+    <h3>Musics</h3>
+
+    <div class='mb-3'>
+      <%= form_with(url: shared_actors_path, scope: :search, method: :get, html: {
+        data: {
+          turbo_frame: "actor-list",
+          controller: "form",
+          action: "input->form#submit"
+        }
+      }) do |form| %>
+        <div class="row m-2">
+          <div class="col-4">
+            <%= form.text_field :name, class: 'form-control' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= turbo_frame_tag "actor-list" do %>
+      <div id="actors">
+        <div class="row py-3 border">
+          <div class="col-11">名前</div>
+          <div class="col-1">
+            <%= link_to '新規', new_shared_actor_path, class: 'link-dark', data: { turbo_frame: "modal" } %>
+          </div>
+        </div>
+        <% @actors.each do |actor| %>
+          <div class="row py-3 border" id="<%= dom_id actor %>">
+            <div class="col-12">
+              <%= link_to actor.name, shared_actor_path(actor), class: "link-dark", data: { turbo_method: :patch } %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="d-flex border" >
+        <%= paginate @actors %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
